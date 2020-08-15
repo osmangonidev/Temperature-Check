@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Weather Update</title>
+    <title>Temperature Check</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -39,20 +39,23 @@
 
 </body>
 <script>
-   function updateWeather(){
-        const inputLocation=document.getElementById('input-location').value;
+    let name="Osman"
+    function updateWeather(){
+        var inputLocation=document.getElementById('input-location').value;
         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputLocation}&units=metric&appid=4769373f97748da7d80aed2575ce9ed5`)
         .then(res=>res.json())
         .then(data=>{
+            name=data;
             const icon=data.weather[0].icon;
             const iconSrc='https://api.openweathermap.org/img/w/'+icon+".png";
             document.getElementById('icon-img').src=iconSrc;
             document.getElementById('location').innerText=inputLocation;
             document.getElementById('temperature').innerText=data.main.temp;
             document.getElementById('weather').innerText=data.weather[0].main;
+            console.log(data.main.temp);
         }
-    )
-   }
+        )
+    }
    document.getElementById('search-btn').addEventListener('click',()=>{
         updateWeather();
    });
